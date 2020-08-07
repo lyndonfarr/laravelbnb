@@ -7,14 +7,12 @@
             :key="`row${row}`"
         >
             <div
-                class="col"
+                class="col d-flex align-items-stretch"
                 v-for="(bookable, column) in bookablesInRow(row)"
                 :key="`bookable-x${row}-y${column}`"
             >
                 <bookable-list-item
-                    :item-title="bookable.title"
-                    :item-content="bookable.content"
-                    :price="1000"
+                    v-bind="bookable"
                 ></bookable-list-item>
             </div>
             <div
@@ -57,39 +55,24 @@ export default {
     },
     created() {
         this.loading = true;
-        setTimeout(() => {
-            this.bookables = [
-                {
-                    title: 'cheap villa',
-                    content: 'a very cheap villa',
-                },
-                {
-                    title: 'cheap villa',
-                    content: 'a very cheap villa',
-                },
-                {
-                    title: 'cheap villa',
-                    content: 'a very cheap villa',
-                },
-                {
-                    title: 'cheap villa',
-                    content: 'a very cheap villa',
-                },
-                {
-                    title: 'cheap villa',
-                    content: 'a very cheap villa',
-                },
-                {
-                    title: 'cheap villa',
-                    content: 'a very cheap villa',
-                },
-                {
-                    title: 'cheap villa',
-                    content: 'a very cheap villa',
-                },
-            ];
-            this.loading = false;
-        }, 2000);
+        const p = new Promise((resolve, reject) => {
+            console.log(resolve);
+            console.log(reject);
+            setTimeout(() => {
+                reject('hello')
+            }, 3000)
+        }).then(result => {
+            console.log(`success ${result}`)
+        }).catch(error => {
+            console.log(`error ${error}`)
+        });
+        const request = axios
+            .get("/api/bookables")
+            .then(response => {
+                this.bookables = response.data.data;
+                this.loading = false;
+            });
+        console.log(request);
     }
 }
 </script>
