@@ -12,7 +12,7 @@
                     <div class="col-md-6">Piotr Juta</div>
                     <div class="col-md-6 d-flex justify-content-end">
                         <star-rating
-                            :rating="review.rating"
+                            :value="review.rating"
                         ></star-rating>
                     </div>
                 </div>

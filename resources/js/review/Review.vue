@@ -3,8 +3,8 @@
         <div class="form-group">
             <label class="text-muted">Select the star rating</label>
             <star-rating
-                :rating="5"
                 class="fa-3x"
+                v-model="review.rating"
             ></star-rating>
         </div>
         <div class="form-group">
@@ -14,3 +14,16 @@
         <button class="btn-lg btn-primary btn-block">Submit</button>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            review: {
+                rating: 5,
+                content: null,
+            },
+        }
+    },
+}
+</script>
